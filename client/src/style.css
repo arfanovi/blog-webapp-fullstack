@@ -1,0 +1,305 @@
+/* Header  */
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f8f9fa;
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .logo img {
+    max-height: 50px;
+  }
+  
+  .nav {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .nav.open {
+    display: flex;
+  }
+  
+  .nav_list {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav_toggle_btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  @media (min-width: 768px) {
+    .nav {
+      display: flex;
+      flex-direction: row;
+    }
+  
+    .nav_toggle_btn {
+      display: none;
+    }
+  }
+  
+
+
+
+
+
+  /* Footer  */
+
+  .footer {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .footer_nav {
+    margin-bottom: 1rem;
+  }
+  
+  .footer_links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .footer_links li a {
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s;
+  }
+  
+  .footer_links li a:hover {
+    color: #0056b3;
+  }
+  
+  .footer_info p {
+    margin: 0.5rem 0;
+    font-size: 0.875rem;
+  }
+  
+  .footer_info a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .footer_info a:hover {
+    text-decoration: underline;
+  }
+  
+
+
+
+
+  /* Error page  */
+  .error-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+    color: #333;
+    text-align: center;
+  }
+  
+  .error-container {
+    max-width: 600px;
+    padding: 2rem;
+  }
+  
+  .error-code {
+    font-size: 6rem;
+    font-weight: bold;
+    color: #ff6f61;
+  }
+  
+  .error-message {
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
+  
+  .error-description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: #666;
+  }
+  
+  .error-home-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  .error-home-link:hover {
+    background-color: #0056b3;
+  }
+  
+
+
+
+
+
+
+  /* Base styling for the post item container */
+.post-item {
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect to lift the post item */
+.post-item:hover {
+  transform: translateY(-5px);
+}
+
+/* Styling for the image container */
+.post-item__image-container {
+  width: 35%;
+  overflow: hidden;
+  position: relative;
+}
+
+.post-item__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-right: 2px solid #ddd;
+}
+
+/* Styling for the content section */
+.post-item__content {
+  padding: 15px;
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Category button style */
+.post-item__category {
+  background-color: #4CAF50;
+  color: #fff;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.post-item__category:hover {
+  background-color: #45a049;
+}
+
+/* Title styling */
+.post-item__title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.post-item__title:hover {
+  color: #007bff;
+}
+
+/* Description styling */
+.post-item__desc {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+/* Meta section styling (Author, Date, Read Time) */
+.post-item__meta {
+  font-size: 12px;
+  color: #777;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.post-item__meta span {
+  margin-right: 10px;
+}
+
+/* Author image and name */
+.post-author {
+  display: flex;
+  align-items: center;
+}
+
+.post-author__image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.post-author__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-author__name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  /* Stack the layout on smaller screens */
+  .post-item {
+    flex-direction: column;
+  }
+
+  .post-item__image-container {
+    width: 100%;
+    height: 200px;
+  }
+
+  .post-item__content {
+    width: 100%;
+  }
+}
