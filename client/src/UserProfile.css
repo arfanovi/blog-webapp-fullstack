@@ -1,0 +1,33 @@
+/* Tailwind Classes for Reference */
+.avatar {
+    @apply w-32 h-32 rounded-full object-cover mb-4;
+  }
+  
+  .file-input {
+    @apply block mx-auto text-sm mt-2;
+  }
+  
+  .input-field {
+    @apply w-full p-2 border border-gray-300 rounded-md mt-1;
+  }
+  
+  .submit-btn, .generate-btn {
+    @apply p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 cursor-pointer;
+  }
+  
+  .quote {
+    @apply italic text-lg text-gray-600;
+  }
+  
+  .user-profile {
+    @apply flex flex-wrap gap-5 p-5 font-sans;
+  }
+  
+  .left-section, .right-section {
+    @apply flex-1 max-w-[60%] bg-gray-100 rounded-lg p-5;
+  }
+  
+  .right-section {
+    @apply max-w-[35%] text-center shadow-md;
+  }
+  

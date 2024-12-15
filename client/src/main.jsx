@@ -19,6 +19,7 @@ import Dashboard from "./pages/Dashboard.jsx"
 import Logout from "./pages/Logout.jsx"
 import AuthorCard from './components/AuthorCard.jsx'
 import Author from './pages/Author.jsx'
+import DeletePost from './pages/DeletePost.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       {path: "/posts/author/:authorId", element: <AuthorPosts/> },
       {path: "myposts/:id", element: <Dashboard/> },
       {path: "posts/:id/edit", element: <EditPost/> },
+      {path: "posts/:id/delete", element: <DeletePost/> },
       {path: "logout", element: <Logout/> },
 
 
