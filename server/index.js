@@ -6,6 +6,8 @@ const connectDB = require('./config/database');
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
+const teamRoutes = require('./routes/team.routes');
+const serviceRoutes = require('./routes/service.routes');
 
 const { notFound, errorMiddleware } = require('./middleware/error.middleware');
 
@@ -24,6 +26,9 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/upload', uploadRoutes);
+
+app.use('/api/team', teamRoutes);
+app.use('/api/service', serviceRoutes);
 
 app.use(notFound);
 app.use(errorMiddleware);
