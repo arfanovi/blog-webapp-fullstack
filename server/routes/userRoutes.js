@@ -1,26 +1,36 @@
-const { Router } = require('express');
+
+
+
+const express = require("express");
 const {
-    register,
-    login,
-    getUser,
-    editUser,
-    changeAvatar,
-    getAuthors,
-} = require('../controllers/user.controller'); // Import controller functions
+  register,
+  login,
+  getUser,
+  editUser,
+  changeAvatar,
+  getAuthors,
+} = require("../controllers/user.controller");
+const authMiddleware = require("../middleware/auth.middleware");
 
-const router = Router();
+const router = express.Router();
 
-// Default route for users
-router.get('/', (req, res) => {
-    res.json("This is the user route");
-});
+// Public Routes
+router.post("/register", register);
+router.post("/login", login);
 
-// Other user routes
-router.post('/register', register);          // POST request to register a user
-router.post('/login', login);                // POST request to log in a user
-router.get('/:id', getUser);                 // GET request to get user details by ID
-router.put('/change-avatar/', changeAvatar); // PUT request to change user avatar
-router.patch('/edit-user', editUser);       // PATCH request to edit user details
-router.get('/authors', getAuthors);         // GET request to fetch authors list
+// Protected Routes - Apply authMiddleware to these routes
+router.use(authMiddleware);
 
-module.exports = router; // Export the router
+// Fetch user details by ID
+router.get("/:id", getUser);
+
+// Update user details by ID
+router.patch("/edit-user/:id", editUser);  // No need for authMiddleware here since it's already applied globally
+
+// Change user avatar (ensure you're handling file uploads correctly in changeAvatar controller)
+router.patch("/change-avatar", changeAvatar);  // Use PATCH for partial update
+
+// Get list of authors (Public route, no auth required)
+router.get("/authors", getAuthors);
+
+module.exports = router;

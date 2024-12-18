@@ -1,9 +1,19 @@
-const { Router } = require('express');
-const router = Router();
+const express = require('express');
+const router = express.Router();
+const {
+  createPost,
+  getPosts,
+  getSinglePost,
+  editPost,
+  deletePost
+} = require('../controllers/post.controller');
 
-// Define the '/posts' route
-router.get('/', (req, res) => {
-    res.json({ message: "This is the posts route" });
-});
+const authMiddleware = require('../middleware/auth.middleware');
 
-module.exports = router; // Export the router
+router.post('/', authMiddleware, createPost);
+router.get('/', getPosts);
+router.get('/:id', getSinglePost);
+router.patch('/:id', authMiddleware, editPost);
+router.delete('/:id', authMiddleware, deletePost);
+
+module.exports = router;
