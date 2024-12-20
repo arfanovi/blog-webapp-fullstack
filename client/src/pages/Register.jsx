@@ -1,115 +1,147 @@
-import React, { useState } from 'react';
-import { FaUserAlt, FaLock, FaEnvelope } from 'react-icons/fa';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom"; // for navigating after registration
 
 const Register = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
 
-  const handleSubmit = (e) => {
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const changeInputHandler = (e) => {
+    const { name, value } = e.target;
+    setUserData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const registerUser = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert('Passwords do not match!');
+    
+    if (userData.password !== userData.password2) {
+      setError("Passwords do not match");
       return;
     }
-    console.log('Registering with:', { username, email, password });
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/users/register", 
+        {
+          name: userData.name,
+          email: userData.email,
+          password: userData.password,
+        }
+      );
+
+      if (response.data.token) {
+        localStorage.setItem("authToken", response.data.token);
+        
+        navigate("/login");
+      } else {
+        setError("Registration failed. Please try again.");
+      }
+    } catch (err) {
+      if (err.response) {
+        setError(err.response.data.message || "Something went wrong");
+      } else {
+        setError("Network error. Please try again later.");
+      }
+    }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-slate-800 text-white">
-      <div className="flex w-full max-w-5xl bg-slate-900 p-8 rounded-lg shadow-lg">
-        <div className="w-full md:w-1/2 flex flex-col justify-center items-center">
-          <h2 className="text-2xl font-semibold text-center mb-6">Create an Account</h2>
-          <form className='w-full' onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label htmlFor="username" className="block text-sm font-medium text-gray-300">Username</label>
-              <div className="flex items-center border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-blue-400">
-                <FaUserAlt className="text-gray-500 ml-2" />
-                <input
-                  type="text"
-                  id="username"
-                  className="w-full px-4 py-2 mt-2 focus:outline-none bg-slate-800 text-white placeholder-gray-400"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                  placeholder="Choose a username"
-                />
-              </div>
-            </div>
-            <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300">Email</label>
-              <div className="flex items-center border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-blue-400">
-                <FaEnvelope className="ml-2" />
-                <input
-                  type="email"
-                  id="email"
-                  className="w-full px-4 py-2 mt-2 focus:outline-none bg-slate-800 text-white placeholder-gray-400"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  placeholder="Enter your email"
-                />
-              </div>
-            </div>
-            <div className="mb-4">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300">Password</label>
-              <div className="flex items-center border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-blue-400">
-                <FaLock className="" />
-                <input
-                  type="password"
-                  id="password"
-                  className="w-full px-4 py-2 mt-2 focus:outline-none bg-slate-800 text-white placeholder-gray-400"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  placeholder="Create a password"
-                />
-              </div>
-            </div>
-            <div className="mb-6">
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300">Confirm Password</label>
-              <div className="flex items-center border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-blue-400">
-                <FaLock className="ml-2" />
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  className="w-full px-4 py-2 mt-2 focus:outline-none bg-slate-800 text-white placeholder-gray-400"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                  placeholder="Confirm your password"
-                />
-              </div>
-            </div>
-            <button
-              type="submit"
-              className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-              Register
-            </button>
-          </form>
-          <div className="mt-4 text-center">
-            <button className="w-full py-2 px-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" alt="Google Logo" className="inline-block w-5 h-5 mr-2" />
-              Register with Google
-            </button>
-          </div>
-          <p className="mt-4 text-center text-sm text-gray-600">
-            Already have an account?{' '}
-            <a href="/login" className="text-blue-600 hover:text-blue-700">
-              Login here
-            </a>
-          </p>
-        </div>
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
+        <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
 
-        {/* Image section */}
-        <div className="hidden md:block w-1/2">
-          <img
-            src="https://via.placeholder.com/500x500?text=Real+Life+Register+Image"
-            alt="Register Illustration"
-            className="w-full h-full object-cover rounded-lg"
-          />
+        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+
+        <form onSubmit={registerUser} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700" htmlFor="name">
+              Full Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={userData.name}
+              onChange={changeInputHandler}
+              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700" htmlFor="email">
+              Email Address
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={userData.email}
+              onChange={changeInputHandler}
+              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700" htmlFor="password">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={userData.password}
+              onChange={changeInputHandler}
+              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700" htmlFor="password2">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              id="password2"
+              name="password2"
+              value={userData.password2}
+              onChange={changeInputHandler}
+              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          >
+            Register
+          </button>
+        </form>
+
+        {/* Add Login link for existing users */}
+        <div className="mt-4 text-center">
+          <p className="text-sm text-gray-600">
+            Already have an account?{" "}
+            <span
+              onClick={() => navigate("/login")} // Navigate to the Login page
+              className="text-blue-500 cursor-pointer"
+            >
+              Login here
+            </span>
+          </p>
         </div>
       </div>
     </div>

@@ -95,7 +95,6 @@ const UserProfile = () => {
   };
 
   const fetchQuote = () => {
-    // Replace with API call for fetching a random quote
     setQuote("The only limit to our realization of tomorrow is our doubts of today.");
   };
 

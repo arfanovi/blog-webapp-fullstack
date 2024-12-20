@@ -12,7 +12,6 @@ const EditPost = () => {
   const [image, setImage] = useState('');
 
   useEffect(() => {
-    // Find the post based on the postId
     const foundPost = DUMMY_POSTS.find((post) => post.id === parseInt(postId));
     if (foundPost) {
       setPost(foundPost);
@@ -25,9 +24,7 @@ const EditPost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Update the post logic (e.g., update DUMMY_POSTS or make an API call)
     console.log({ title, description, category, image });
-    // Redirect back to dashboard or post list after submission
     history.push('/dashboard');
   };
 
@@ -70,7 +67,6 @@ const EditPost = () => {
             className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Select a category</option>
-            {/* You can map categories here as before */}
           </select>
         </div>
 

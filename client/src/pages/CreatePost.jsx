@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { DUMMY_POSTS } from '../data'; // Assuming DUMMY_POSTS is in data.js
+import { DUMMY_POSTS } from '../data'; 
 
 const CreatePost = () => {
-  // Extracting unique categories from the DUMMY_POSTS
   const categories = [...new Set(DUMMY_POSTS.map(post => post.category))];
 
   const [title, setTitle] = useState('');
@@ -12,7 +11,6 @@ const CreatePost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here (e.g., send data to the server)
     console.log({ title, description, category, image });
   };
 

@@ -17,13 +17,14 @@ import CategoryPost from "./pages/CategoryPosts.jsx"
 import AuthorPosts from "./pages/AuthorPosts.jsx"
 import Dashboard from "./pages/Dashboard.jsx"
 import Logout from "./pages/Logout.jsx"
-import AuthorCard from './components/AuthorCard.jsx'
+// import AuthorCard from './components/AuthorCard.jsx'
 import Author from './pages/Author.jsx'
 import DeletePost from './pages/DeletePost.jsx'
+import UserProvider from './context/userContext.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout/>,
+    element: <UserProvider><Layout/></UserProvider>,
     errorElement: <ErrorPage/>,
     children: [
       {index: true, element: <Home/>},

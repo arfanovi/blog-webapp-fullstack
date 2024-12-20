@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import '../style.css';  // Import custom CSS
+import '../style.css';  
 import PostAuthor from './PostAuthor';
 
 const PostItem = ({ id, img, category, title, desc, readTime, date, authorID, authorName }) => {
@@ -28,7 +28,7 @@ const PostItem = ({ id, img, category, title, desc, readTime, date, authorID, au
               authorImage={`https://via.placeholder.com/40`} 
             />
           </Link>
-          {/* Placeholder image, replace with actual author images */}
+          
           | <span>{readTime}</span> | <span>{date}</span>
         </div>
       </div>

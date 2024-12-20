@@ -13,7 +13,7 @@ const postSchema = new mongoose.Schema(
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // Reference to the User model
+      ref: "User", 
       required: true,
     },
     category: {
@@ -21,7 +21,7 @@ const postSchema = new mongoose.Schema(
       required: true,
     },
     image: {
-      type: String, // Image URL or file path
+      type: String, 
       default: "",
     },
   },
